@@ -80,11 +80,47 @@ namespace Piller.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to W wybrane dni.
+        /// </summary>
+        public static string CustomDayLabel {
+            get {
+                return ResourceManager.GetString("CustomDayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to wieczorem.
         /// </summary>
         public static string EveningLabel {
             get {
                 return ResourceManager.GetString("EveningLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Codziennie.
+        /// </summary>
+        public static string EveryDayLabel {
+            get {
+                return ResourceManager.GetString("EveryDayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Planer wakacyjny.
+        /// </summary>
+        public static string HolidayTitle {
+            get {
+                return ResourceManager.GetString("HolidayTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje leki.
+        /// </summary>
+        public static string MedicationCardTitle {
+            get {
+                return ResourceManager.GetString("MedicationCardTitle", resourceCulture);
             }
         }
         
@@ -107,7 +143,7 @@ namespace Piller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nowy.
+        ///   Looks up a localized string similar to Nowy lek.
         /// </summary>
         public static string MedicationDosageViewModel_Title {
             get {
@@ -116,7 +152,7 @@ namespace Piller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weź pigułkę.
+        ///   Looks up a localized string similar to Najbliższe.
         /// </summary>
         public static string MedicationSummaryListViewModel_Title {
             get {
@@ -136,9 +172,9 @@ namespace Piller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Nowa godzina.
         /// </summary>
-        public static string NewHourLabel {
+        public static string NewHourPlaceHolder {
             get {
-                return ResourceManager.GetString("NewHourLabel", resourceCulture);
+                return ResourceManager.GetString("NewHourPlaceHolder", resourceCulture);
             }
         }
         

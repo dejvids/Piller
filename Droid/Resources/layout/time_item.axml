@@ -4,7 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="?attr/selectableItemBackground">
     <TextView
         android:id="@+id/hourName"
         android:layout_width="wrap_content"
@@ -16,9 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="20:00"
-        android:layout_toLeftOf="@+id/button_delete_dosage_hour"
-        />
-   <ImageView
+        android:layout_toLeftOf="@+id/button_delete_dosage_hour" />
+    <ImageView
         android:id="@+id/button_delete_dosage_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,5 +26,10 @@
         android:clickable="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="5dp"
-        android:background="?attr/selectableItemBackground"/>
+        android:background="?attr/selectableItemBackground" />
+    <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/md_grey_200" 
+       android:layout_below="@+id/hourName"/>
 </RelativeLayout>
