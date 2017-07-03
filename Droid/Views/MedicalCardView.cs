@@ -11,6 +11,8 @@ using Android.Widget;
 using MvvmCross.Droid.Support.V4;
 using Android.Runtime;
 using MvvmCross.Droid.Shared.Attributes;
+using Piller.Data;
+using System.Collections.Generic;
 
 namespace Piller.Droid.Views
 {
@@ -58,8 +60,9 @@ namespace Piller.Droid.Views
 
             bindingSet.Bind(emptyLabel)
                 .For(v => v.Visibility)
-                .To(vm => vm.IsEmpty)
-                .WithConversion(new InlineValueConverter<bool, ViewStates>(isEmpty => isEmpty ? ViewStates.Visible : ViewStates.Gone));
+                .To(vm => vm.MedicationList)
+               .WithConversion(new InlineValueConverter<IList<MedicationDosage>, ViewStates>(m => m.Count > 0 ? ViewStates.Gone : ViewStates.Visible));
+
 
 
 

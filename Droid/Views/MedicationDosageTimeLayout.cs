@@ -1,5 +1,7 @@
 ﻿using System;
 using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Binding.Droid.BindingContext;
+
 namespace Piller.Droid.Views
 {
         
@@ -9,5 +11,14 @@ namespace Piller.Droid.Views
         {
         }
     }
-        
+
+    class UpcomingListLayout:MvxLinearLayout
+    {
+        public UpcomingListLayout(Android.Content.Context context, Android.Util.IAttributeSet attrs):base(context,attrs,new MedicationOncommingAdapter(context))
+        {
+
+        }
+    }
+  
+
 }

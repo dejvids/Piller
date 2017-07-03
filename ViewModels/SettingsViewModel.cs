@@ -43,13 +43,22 @@ namespace Piller.ViewModels
             get { return hoursList; }
             set { SetProperty(ref hoursList, value); }
         }
+        private double interval;
+        public double Interval
+        {
+            get { return interval; }
+            set { SetProperty(ref interval, value); }
+        }
         public ReactiveCommand<Unit,Unit> AddHour { get; }
 
         public ReactiveCommand<Unit, bool> Save { get; }
+        public ReactiveCommand<Unit, Unit> SetInterval { get; }
+
         private SettingsData settingsData;
         private ISettings settings = Mvx.Resolve<ISettings>();
         private readonly string key = SettingsData.Key;
         private const int maxItems=6;
+
 
         public SettingsViewModel()
         {
@@ -62,9 +71,13 @@ namespace Piller.ViewModels
                     new TimeItem(Resources.AppResources.MorningLabel) {Hour = TimeSpan.Parse("08:00:00") },
                     new TimeItem(Resources.AppResources.EveningLabel){Hour=TimeSpan.Parse("20:00:00")}
                 };
+                Interval = 2;
             }
             else
+            {
                 HoursList = new ObservableCollection<TimeItem>(settingsData.HoursList);
+                Interval = settingsData.Interval;
+            }
            
             var canAdd = this.WhenAnyValue(vm => vm.HoursList.Count, c => c < maxItems);
             AddHour = ReactiveCommand.Create(() =>
@@ -82,12 +95,31 @@ namespace Piller.ViewModels
                             HoursList.Add(new TimeItem(newName));
                         }
                     }));
-            }, 
+
+        }, 
             canAdd);
+
+             SetInterval = ReactiveCommand.Create(() =>
+                {
+
+                    UserDialogs.Instance.Prompt(new PromptConfig()
+                        .SetInputMode(InputType.Number)
+                        .SetTitle("Najbliższe")
+                        .SetPlaceholder("ile godzin?")
+                        .SetAction(o =>
+                        {
+                            if (o.Ok)
+                            {
+                                double i;
+                                if (double.TryParse(o.Text, out i))
+                                    Interval = i;
+                            }
+                        }));
+                        });
 
             Save = ReactiveCommand.Create(() =>
             {
-                var data = JsonConvert.SerializeObject(new SettingsData() {HoursList=this.HoursList });
+                var data = JsonConvert.SerializeObject(new SettingsData() {HoursList=this.HoursList,Interval=this.Interval });
                 settings.AddOrUpdateValue<string>(key, data);
                 return true;
             });
@@ -100,6 +132,7 @@ namespace Piller.ViewModels
                     Close(this);
                 }
             });
+
         }
         public async Task reloadDataBase()
         {

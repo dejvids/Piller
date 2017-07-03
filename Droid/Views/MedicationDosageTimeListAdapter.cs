@@ -12,8 +12,6 @@ namespace Piller.Droid.Views
 {
     public class MedicationDosageTimeListAdapter : MvxAdapterWithChangedEvent
     {
-        private IMvxAndroidBindingContext bindingContext;
-
         public ReactiveCommand<TimeItem, TimeItem> CLickItem { get;  }
         public ReactiveCommand<TimeItem, TimeItem> DeleteRequested { get; }
 

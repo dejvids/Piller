@@ -1,8 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-</android.support.design.widget.CoordinatorLayout>
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <LinearLayout
+       android:layout_width="match_parent"
+    android:layout_height="match_parent"
+       android:orientation="vertical">
+      
+    
+  <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Zaległe"
+          android:textSize="18sp"
+          android:textColor="@color/md_black_1000"
+          android:padding="8dp" />
+    <TextView
+          android:id="@+id/empty1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Pusto"
+          android:textSize="17sp" />
+      <OncomingListLayout
+             android:id="@+id/overdueMedicines"
+          android:layout_width="match_parent"
+           android:orientation="vertical"
+          android:layout_height="wrap_content" />
+    <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Najbliższe"
+          android:textSize="18sp"
+          android:textColor="@color/md_black_1000"
+          android:padding="8dp" />
+    <TextView
+          android:id="@+id/empty2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Pusto"
+          android:textSize="17sp" />
+      <OncomingListLayout
+            android:id="@+id/upcomingMedicines"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" 
+            android:orientation="vertical"/>
+    <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Później"
+          android:textSize="18sp"
+          android:textColor="@color/md_black_1000"
+          android:padding="8dp" />
+    <TextView
+          android:id="@+id/empty3"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Pusto"
+          android:textSize="17sp" />
+      <OncomingListLayout
+            android:id="@+id/latterMedicines"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    
+    </LinearLayout>
+  </ScrollView>
+</RelativeLayout>

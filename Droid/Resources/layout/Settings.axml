@@ -89,22 +89,23 @@
       android:layout_width="match_parent"
       android:layout_height="1dp"
       android:background="@color/md_grey_200" />
-  
+
   <RelativeLayout
+      android:id="@+id/upcomingHour"
       android:orientation="horizontal"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:clickable="true"
       android:background="?attr/selectableItemBackground"
       android:padding="16dp"
-      android:id="@+id/evening">
+      >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Okienko 'najbliższe'"
         android:gravity="left" />
     <TextView
-        android:id="@+id/eveningHour"
+        android:id="@+id/intervalLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+/-2h"

@@ -236,6 +236,7 @@
     <Compile Include="Setup.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="DebugTrace.cs" />
+    <Compile Include="Views\MedicationOncommingAdapter.cs" />
     <Compile Include="Views\MedicationSummaryListView.cs" />
     <Compile Include="Views\MedicationDosageView.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
@@ -322,7 +323,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_plus.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_plus.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_plus.png" />
-    <AndroidResource Include="Resources\layout\MedicationDosageView.axml" />
+    <AndroidResource Include="Resources\layout\MedicationDosageView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\time_item.axml" />
     <AndroidResource Include="Resources\menu\dosagemenu.xml" />
     <AndroidResource Include="Resources\layout\medication_summary_item.axml" />

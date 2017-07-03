@@ -25,6 +25,8 @@ namespace Piller.Droid.Views
         MedicationDosageTimeLayout HoursList;
         TextView addHour;
         TimeItem newItem;
+        RelativeLayout upcomingOption;
+        TextView intervalLabel;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -36,6 +38,13 @@ namespace Piller.Droid.Views
             SupportActionBar.SetDisplayShowHomeEnabled(true);
             SupportActionBar.Title = "Ustawienia";
 
+            upcomingOption = FindViewById<RelativeLayout>(Resource.Id.upcomingHour);
+            upcomingOption.Click += (o, e) =>
+            {
+
+            this.ViewModel.SetInterval.Execute().Subscribe();
+            };
+            intervalLabel = FindViewById<TextView>(Resource.Id.intervalLabel);
             HoursList = FindViewById<MedicationDosageTimeLayout>(Resource.Id.hoursList);
             HoursList.ItemTemplateId = Resource.Layout.time_item;
 
@@ -78,6 +87,9 @@ namespace Piller.Droid.Views
             bindingSet.Bind(addHour)
                 .For(nameof(View.Click))
                 .To(vm => vm.AddHour);
+            bindingSet.Bind(intervalLabel)
+                .To(vm => vm.Interval)
+                .WithConversion(new InlineValueConverter<double, string>(d => $"+/-{d}h"));
             bindingSet.Apply();
         }
 

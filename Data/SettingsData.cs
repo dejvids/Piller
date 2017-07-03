@@ -11,6 +11,7 @@ namespace Piller.Data
     {
         public static string Key { get; } = "hours_settings";
         public IEnumerable<TimeItem> HoursList { get; set; }
+        public double Interval { get; set; }
 
     }
     public class TimeItem
