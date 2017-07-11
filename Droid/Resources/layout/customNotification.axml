@@ -2,34 +2,67 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:paddingRight="10dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center" />
+            <ImageView
+                android:id="@+id/iconView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/imageView"
+                android:layout_alignBottom="@+id/imageView"
+                android:layout_margin="-10dp" />
+        </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
-            <TextView
-                android:text="Title"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="5dp">
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/titleTextView" />
-            <TextView
-                android:text="Description"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:padding="5dp">
+                <TextView
+                    android:text="Piller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/NotificationTitle" />
+                <TextView
+                    android:text="Description"
+                    android:textAppearance="@style/NotificationDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/descTextView"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/descTextView" />
+                android:layout_marginLeft="5dp"
+                android:weightSum="8">
+                <TextView
+                    android:text="Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/NotificationTextMedium"
+                    android:id="@+id/titleTextView" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

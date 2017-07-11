@@ -2,7 +2,6 @@ using System;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
-using Services;
 
 namespace Piller.Data
 {
@@ -29,6 +28,8 @@ namespace Piller.Data
 
         //lista godzin w postaci hh:mm;hh:mm...
         public string HoursEncoded { get; set; }
+
+		public string RingUri { get; set; }
 
         //kodowanie i dekodowanie godzin. Tej wlasciwosci nie zapisujemy do bazy
         [Ignore]

@@ -9,11 +9,10 @@ namespace Services
 {
 	public class AndroidImageLoader : ImageLoaderService
 	{
+        private static string ImagePath = "Piller_";
 		private readonly IMvxFileStore fileStore = Mvx.Resolve<IMvxFileStore>();
-        private readonly string nativePath = "Piller_";
 
-
-        public static byte[] ReadFully(Stream input)
+		public static byte[] ReadFully(Stream input)
 		{
 			using (MemoryStream ms = new MemoryStream())
 			{
@@ -24,19 +23,33 @@ namespace Services
 
 		public byte[] LoadImage(string name)
 		{
-			var path = this.fileStore.NativePath(nativePath) + name;
+			var path = this.fileStore.NativePath(ImagePath) + name;
             return ReadFully(fileStore.OpenRead(path));
 		}
 
-		public void SaveImage(byte[] bytes, string name, int compressionRate = 100)
+		public void SaveImage(byte[] bytes, string name, int maxDimenSize = -1)
 		{
-			var path = this.fileStore.NativePath(nativePath) + name;
+			var path = this.fileStore.NativePath(ImagePath) + name;
 
-			if (compressionRate != 100)
+            if (maxDimenSize != -1)
 			{
 				var stream = new MemoryStream();
-				Bitmap bitmap = BitmapFactory.DecodeByteArray(bytes, 0 ,bytes.Length); 
-				bitmap.Compress(Bitmap.CompressFormat.Jpeg, compressionRate, stream);
+				Bitmap bitmap = BitmapFactory.DecodeByteArray(bytes, 0 ,bytes.Length);
+                float scaleRatio;
+                if (bitmap.Width >= bitmap.Height)
+                {
+                    scaleRatio = (float)maxDimenSize / (float)bitmap.Width;
+                } else 
+                {
+                    scaleRatio = (float)maxDimenSize / (float)bitmap.Height;
+                }
+
+                var matrix = new Matrix();
+                matrix.PostScale(scaleRatio, scaleRatio);
+
+                var scaledBitmap = Bitmap.CreateBitmap(bitmap, 0, 0, bitmap.Width, bitmap.Height, matrix, false);
+                scaledBitmap.Compress(Bitmap.CompressFormat.Jpeg, 75, stream);
+                bitmap.Recycle();
 				fileStore.WriteFile(path, stream.ToArray());	
 			}
 			else 

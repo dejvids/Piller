@@ -1,4 +1,4 @@
-﻿using Cheesebaron.MvxPlugins.Settings.Interfaces;
+using Cheesebaron.MvxPlugins.Settings.Interfaces;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Piller.Data;
@@ -37,28 +37,44 @@ namespace Piller.ViewModels
             get { return eveningHour; }
             set { SetProperty(ref eveningHour, value); }
         }
+
+		private string ringUri;
+		public string RingUri
+		{
+			get { return ringUri; }
+			set { SetProperty(ref ringUri, value); }
+		}
+
+		private int snoozeMinutes;
+		public int SnoozeMinutes
+		{
+			get { return snoozeMinutes; }
+			set { SetProperty(ref snoozeMinutes, value); }
+		}
+
+		private int windowHours;
+		public int WindowHours
+		{
+			get { return windowHours; }
+			set { SetProperty(ref windowHours, value); }
+		}
+
         private ObservableCollection<TimeItem> hoursList;
         public ObservableCollection<TimeItem> HoursList
         {
             get { return hoursList; }
             set { SetProperty(ref hoursList, value); }
         }
-        private double interval;
-        public double Interval
-        {
-            get { return interval; }
-            set { SetProperty(ref interval, value); }
-        }
         public ReactiveCommand<Unit,Unit> AddHour { get; }
+		public ReactiveCommand<String, Unit> SetRingUri { get; }
+		public ReactiveCommand<int, Unit> SetSnooze { get; }
+		public ReactiveCommand<int, Unit> SetWindow { get; }
 
         public ReactiveCommand<Unit, bool> Save { get; }
-        public ReactiveCommand<Unit, Unit> SetInterval { get; }
-
         private SettingsData settingsData;
         private ISettings settings = Mvx.Resolve<ISettings>();
         private readonly string key = SettingsData.Key;
         private const int maxItems=6;
-
 
         public SettingsViewModel()
         {
@@ -69,15 +85,11 @@ namespace Piller.ViewModels
                 HoursList = new ObservableCollection<TimeItem>()
                 {
                     new TimeItem(Resources.AppResources.MorningLabel) {Hour = TimeSpan.Parse("08:00:00") },
-                    new TimeItem(Resources.AppResources.EveningLabel){Hour=TimeSpan.Parse("20:00:00")}
+                    new TimeItem(Resources.AppResources.EveningLabel){Hour=TimeSpan.Parse("20:00:00") }
                 };
-                Interval = 2;
             }
             else
-            {
                 HoursList = new ObservableCollection<TimeItem>(settingsData.HoursList);
-                Interval = settingsData.Interval;
-            }
            
             var canAdd = this.WhenAnyValue(vm => vm.HoursList.Count, c => c < maxItems);
             AddHour = ReactiveCommand.Create(() =>
@@ -95,31 +107,21 @@ namespace Piller.ViewModels
                             HoursList.Add(new TimeItem(newName));
                         }
                     }));
-
-        }, 
+            }, 
             canAdd);
 
-             SetInterval = ReactiveCommand.Create(() =>
-                {
+            RingUri = settingsData.RingUri;
+            SetRingUri = ReactiveCommand.Create<String>(uri => RingUri = uri);
 
-                    UserDialogs.Instance.Prompt(new PromptConfig()
-                        .SetInputMode(InputType.Number)
-                        .SetTitle("Najbliższe")
-                        .SetPlaceholder("ile godzin?")
-                        .SetAction(o =>
-                        {
-                            if (o.Ok)
-                            {
-                                double i;
-                                if (double.TryParse(o.Text, out i))
-                                    Interval = i;
-                            }
-                        }));
-                        });
+			this.WindowHours = settingsData.WindowHours;
+			this.SnoozeMinutes = settingsData.SnoozeMinutes;
+
+            this.SetSnooze = ReactiveCommand.Create<int>(value => this.SnoozeMinutes = value);
+			this.SetWindow = ReactiveCommand.Create<int>(value => this.WindowHours = value);
 
             Save = ReactiveCommand.Create(() =>
             {
-                var data = JsonConvert.SerializeObject(new SettingsData() {HoursList=this.HoursList,Interval=this.Interval });
+				var data = JsonConvert.SerializeObject(new SettingsData() {HoursList=this.HoursList, RingUri = this.ringUri, WindowHours = this.windowHours, SnoozeMinutes = this.snoozeMinutes });
                 settings.AddOrUpdateValue<string>(key, data);
                 return true;
             });
@@ -128,11 +130,10 @@ namespace Piller.ViewModels
                 if (x)
                 {
                     await reloadDataBase();
-                    Mvx.Resolve<IMvxMessenger>().Publish(new SettingsChangeMessage(this,MorningHour,EveningHour));
+					Mvx.Resolve<IMvxMessenger>().Publish(new SettingsChangeMessage(this,MorningHour,EveningHour,ringUri));
                     Close(this);
                 }
             });
-
         }
         public async Task reloadDataBase()
         {
@@ -155,8 +156,13 @@ namespace Piller.ViewModels
                 if(dosageHours.Count>0)
                 {
                     item.DosageHours = dosageHours;
+					item.RingUri = ringUri;
+
+                    // szud bi in som separet entity
+                    await notifications.CancelAllNotificationsForMedication(item);
                     await storage.SaveAsync<MedicationDosage>(item);
-                    await notifications.ScheduleNotification(item);
+                    await DbHelper.AddNotificationOccurrences(item);
+                    await notifications.ScheduleNotifications(item);
                 }
             }
         }

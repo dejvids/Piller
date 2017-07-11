@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using MvvmCross.Plugins.Messenger;
 namespace Piller.ViewModels
 {
     public class DataChangedMessage : MvxMessage
     {
-        public DataChangedMessage(object sender) : base(sender)
+      public DataChangedMessage(object sender) : base(sender)
         {
         }
     }
@@ -12,10 +12,14 @@ namespace Piller.ViewModels
     {
         public TimeSpan Morning { get; }
         public TimeSpan Evening { get; }
-        public SettingsChangeMessage(object sender, TimeSpan morning, TimeSpan evening) : base(sender)
+		public string RingUri { get; }
+
+		public SettingsChangeMessage(object sender, TimeSpan morning, TimeSpan evening, string ringUri) : base(sender)
         {
             Morning = morning;
             Evening = evening;
+            RingUri = ringUri;
+
         }
     }
 

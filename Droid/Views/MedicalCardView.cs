@@ -16,7 +16,7 @@ using System.Collections.Generic;
 
 namespace Piller.Droid.Views
 {
-    [MvxFragment(typeof(RootViewModel), Resource.Id.content_frame, true)]
+    [MvxFragment(typeof(RootViewModel), Resource.Id.content_frame, false)]
 	[Register("piller.droid.views.MedicalCardView")]
     public class MedicalCardView : MvxFragment<MedicalCardViewModel>
     {
@@ -29,7 +29,7 @@ namespace Piller.Droid.Views
             var view = this.BindingInflate(Resource.Layout.MedicalCard, null);
             ((MvxCachingFragmentCompatActivity)Activity).SupportActionBar.Title = AppResources.MedicationCardTitle;
             newMedicationDosage = view.FindViewById<FloatingActionButton>(Resource.Id.newMedicationDosage);
-            emptyLabel = view.FindViewById<TextView>(Resource.Id.empty);
+            emptyLabel = view.FindViewById<TextView>(Resource.Id.emptyMedicationListLabel);
 
             medicationList = view.FindViewById<MvxListView>(Resource.Id.medicationList);
             medicationList.ItemTemplateId = Resource.Layout.medication_summary_item;
@@ -64,8 +64,7 @@ namespace Piller.Droid.Views
                .WithConversion(new InlineValueConverter<IList<MedicationDosage>, ViewStates>(m => m.Count > 0 ? ViewStates.Gone : ViewStates.Visible));
 
 
-
-
+			
             bindingSet.Apply();
         }
     }

@@ -11,6 +11,8 @@ using System;
 using MvvmCross.Platform.Droid.Platform;
 using Piller.Services;
 using Piller.Droid.Services;
+using System.Threading;
+using System.Globalization;
 
 namespace Piller.Droid
 {
@@ -18,6 +20,8 @@ namespace Piller.Droid
     {
         public Setup(Context applicationContext) : base(applicationContext)
         {
+			Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
+			Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
         }
 
         protected override IMvxApplication CreateApp()
@@ -33,10 +37,10 @@ namespace Piller.Droid
         protected override MvvmCross.Droid.Views.IMvxAndroidViewPresenter CreateViewPresenter()
         {
             var mvxFragmentsPresenter = new MvxFragmentsPresenter(AndroidViewAssemblies);
-            Mvx.RegisterSingleton<IMvxAndroidViewPresenter>(mvxFragmentsPresenter);
-            Mvx.RegisterSingleton<ImageLoaderService>(new AndroidImageLoader());
-            Mvx.RegisterSingleton<IMedicineDatabaseService>(() => new DroidMedicinesDatabaseService());
-            Mvx.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
+			Mvx.RegisterSingleton<IMvxAndroidViewPresenter>(mvxFragmentsPresenter);
+			Mvx.RegisterSingleton<ImageLoaderService>(new AndroidImageLoader());
+			Mvx.RegisterSingleton<IMedicineDatabaseService>(() => new DroidMedicinesDatabaseService());
+			Mvx.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
             return mvxFragmentsPresenter;
 
         }

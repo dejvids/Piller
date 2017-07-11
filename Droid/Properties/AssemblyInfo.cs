@@ -5,7 +5,7 @@ using Android.App;
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("Piller.Droid")]
+[assembly: AssemblyTitle("Piller")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -25,3 +25,9 @@ using Android.App;
 
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
+
+#if DEBUG
+[assembly: Application(Debuggable=true)]
+#else
+[assembly: Application(Debuggable = false)]
+#endif
