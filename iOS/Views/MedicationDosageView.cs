@@ -7,24 +7,30 @@ using MvvmCross.Binding.BindingContext;
 using UIKit;
 using Piller.iOS.Common.Dialog;
 using System.Collections.Generic;
+using MvvmCross.iOS.Views.Presenters.Attributes;
+using Foundation;
 
 namespace Piller.iOS.Views
 {
-    public class MedicationDosageViewController : MvxTableViewController<MedicationDosageViewModel>
+    [MvxChildPresentation]
+    [Register("MedicationDosageView")]
+    public class MedicationDosageView : MvxTableViewController<MedicationDosageViewModel>
     {
 
+        public MedicationDosageView() : base(UITableViewStyle.Grouped)
+        {
+            
+        }
         ElementTableSource tableSource;
         SingleLineEditElement drugNameElement;
+        SingleLineEditElement dosageElement;
         UIBarButtonItem saveButton;
-
-        public MedicationDosageViewController() : base(UITableViewStyle.Grouped)
-        {
-           
-        }
 
         public override void ViewDidLoad()
         {
+          
             base.ViewDidLoad();
+            this.Title = "Nowy lek";
 
             tableSource = new ElementTableSource(createEditForm(), this.TableView);
             this.TableView.RowHeight = UITableView.AutomaticDimension;
@@ -34,24 +40,29 @@ namespace Piller.iOS.Views
             this.saveButton = new UIBarButtonItem (UIKit.UIBarButtonSystemItem.Save);
             this.NavigationItem.RightBarButtonItem = saveButton;
 
+            /*
             setBindings();
 
+            */
         }
 
         private FormDefinition createEditForm()
         {
             drugNameElement = new SingleLineEditElement { Title = AppResources.MedicationDosageView_MedicationName };
             var drugEntrySection = new Section(String.Empty, new List<Element> { drugNameElement });
+            
+            dosageElement = new SingleLineEditElement { Title = "Dawka" };
+            var dosageEntrySection = new Section(String.Empty, new List<Element> { dosageElement });
 
-            var rootElement = new FormDefinition(new List<Section> { drugEntrySection });
+            var rootElement = new FormDefinition(new List<Section> { drugEntrySection,dosageEntrySection });
        
             return rootElement;
         }
-
+        /*
         private void setBindings()
         {
   
-            var bindingSet = this.CreateBindingSet<MedicationDosageViewController, MedicationDosageViewModel>();
+            var bindingSet = this.CreateBindingSet<MedicationDosageView, MedicationDosageViewModel>();
 
             bindingSet.Bind(drugNameElement)
                       .For(element => element.Value)
@@ -63,11 +74,11 @@ namespace Piller.iOS.Views
             bindingSet.Apply();
         }
 
+        */
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
             this.tableSource.Dispose();
         }
-         
     }
 }
