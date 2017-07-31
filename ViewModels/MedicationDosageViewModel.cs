@@ -25,6 +25,7 @@ namespace Piller.ViewModels
 {
     public class MedicationDosageViewModel : MvxViewModel
     {
+       /*
         IMvxPictureChooserTask PictureChooser = Mvx.Resolve<IMvxPictureChooserTask>();
         private IPermanentStorageService storage = Mvx.Resolve<IPermanentStorageService>();
         private readonly ImageLoaderService imageLoader = Mvx.Resolve<ImageLoaderService>();
@@ -445,38 +446,43 @@ namespace Piller.ViewModels
 			    DosageHours.Add(item.Hour);
 			}
         }
+        public async void Init(MedicationDosageNavigation nav)
+        {
+            if (nav.MedicationDosageId != MedicationDosageNavigation.NewRecord)
+            {
+                isNew = false;
+                MedicationDosage item = await storage.GetAsync<Data.MedicationDosage>(nav.MedicationDosageId);
+                Id = item.Id;
+                MedicationName = item.Name;
+                StartDate = item.From;
+                EndDate = item.To;
+                MedicationDosage = item.Dosage;
+                Monday = item.Days.HasFlag(DaysOfWeek.Monday);
+                Tuesday = item.Days.HasFlag(DaysOfWeek.Tuesday);
+                Wednesday = item.Days.HasFlag(DaysOfWeek.Wednesday);
+                Thursday = item.Days.HasFlag(DaysOfWeek.Thursday);
+                Friday = item.Days.HasFlag(DaysOfWeek.Friday);
+                Saturday = item.Days.HasFlag(DaysOfWeek.Saturday);
+                Sunday = item.Days.HasFlag(DaysOfWeek.Sunday);
+                DosageHours = new List<TimeSpan>(item.DosageHours);
+                HoursLabel = item.Hours;
+                RingUri = item.RingUri;
 
-		public async void Init(MedicationDosageNavigation nav)
-		{
-			if (nav.MedicationDosageId != MedicationDosageNavigation.NewRecord)
-			{
-				isNew = false;
-				MedicationDosage item = await storage.GetAsync<Data.MedicationDosage>(nav.MedicationDosageId);
-				Id = item.Id;
-				MedicationName = item.Name;
-				StartDate = item.From;
-				EndDate = item.To;
-				MedicationDosage = item.Dosage;
-				Monday = item.Days.HasFlag(DaysOfWeek.Monday);
-				Tuesday = item.Days.HasFlag(DaysOfWeek.Tuesday);
-				Wednesday = item.Days.HasFlag(DaysOfWeek.Wednesday);
-				Thursday = item.Days.HasFlag(DaysOfWeek.Thursday);
-				Friday = item.Days.HasFlag(DaysOfWeek.Friday);
-				Saturday = item.Days.HasFlag(DaysOfWeek.Saturday);
-				Sunday = item.Days.HasFlag(DaysOfWeek.Sunday);
-				DosageHours = new List<TimeSpan>(item.DosageHours);
-				HoursLabel = item.Hours;
-				RingUri = item.RingUri;
-
-				if (!string.IsNullOrEmpty(item.ImageName))
-					Bytes = imageLoader.LoadImage(item.ImageName);
-			}
-			else
-			{
-				isNew = true;
-				selectAllDays();
-			}
-			loadSettings();
-		}
+                if (!string.IsNullOrEmpty(item.ImageName))
+                    Bytes = imageLoader.LoadImage(item.ImageName);
+            }
+            else
+            {
+                isNew = true;
+                selectAllDays();
+            }
+            loadSettings();
+        }
+        
+		*/
+        public void Init()
+        {
+            System.Diagnostics.Debug.WriteLine("Init");
+        }
     }
 }

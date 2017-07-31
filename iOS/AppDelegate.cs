@@ -2,7 +2,9 @@
 using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
 using Foundation;
+using MvvmCross.iOS.Support;
 using UIKit;
+using MvvmCross.iOS.Views.Presenters;
 
 namespace Piller.iOS
 {
@@ -19,7 +21,9 @@ namespace Piller.iOS
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var setup = new Setup(this, Window);
+
+            var presenter = new MvxIosViewPresenter(this, this.Window);
+			var setup = new Setup(this, presenter);
             setup.Initialize();
 
             var startup = Mvx.Resolve<IMvxAppStart>();

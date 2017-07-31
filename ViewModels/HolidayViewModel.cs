@@ -14,6 +14,7 @@ namespace Piller.ViewModels
 {
 	public class HolidayViewModel : MvxViewModel
 	{
+       
 		private IPermanentStorageService storage = Mvx.Resolve<IPermanentStorageService>();
 		MvxSubscriptionToken dataChangedSubscriptionToken;
 		MvxSubscriptionToken settingsChangedSubscriptionToken;
@@ -34,15 +35,15 @@ namespace Piller.ViewModels
 			dataChangedSubscriptionToken = Mvx.Resolve<IMvxMessenger>().Subscribe<DataChangedMessage>(async mesg => await Init());
 			settingsChangedSubscriptionToken = Mvx.Resolve<IMvxMessenger>().Subscribe<SettingsChangeMessage>(async mesg => await Init());
 		}
+        public async Task Init()
+        {
 
-		public async Task Init()
-		{
-
-			var items = await storage.List<MedicationDosage>();
-			if (items != null)
-				MedicationList = new List<MedicationDosage>(items);
-			else
-				MedicationList = new List<MedicationDosage>();   }
+            var items = await storage.List<MedicationDosage>();
+            if (items != null)
+                MedicationList = new List<MedicationDosage>(items);
+            else
+                MedicationList = new List<MedicationDosage>();   }
 		
+
     }
 }

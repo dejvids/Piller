@@ -18,6 +18,7 @@ namespace Piller.ViewModels
 {
     public class RegistrationViewModel : MvxViewModel
     {
+        /*
         private IPermanentStorageService storage = Mvx.Resolve<IPermanentStorageService>();
         private readonly INotificationService notifications = Mvx.Resolve<INotificationService>();
         MvxSubscriptionToken notificationsChangedSubscriptionToken;
@@ -79,7 +80,7 @@ namespace Piller.ViewModels
             
             await storage.DeleteAsync<NotificationOccurrence>(notification);
             //await this.notifications.OverdueNotification();
-        }*/
+        }
 
         public async Task Init()
         {
@@ -87,8 +88,8 @@ namespace Piller.ViewModels
 
             notificationsChangedSubscriptionToken = Mvx.Resolve<IMvxMessenger>().Subscribe<NotificationsChangedMessage>(async mesg => await Init());
 
-			var settingsDataString = Mvx.Resolve<ISettings>().GetValue<string>(SettingsData.Key);
-			var settingsData = JsonConvert.DeserializeObject<SettingsData>(settingsDataString);
+            var settingsDataString = Mvx.Resolve<ISettings>().GetValue<string>(SettingsData.Key);
+            var settingsData = JsonConvert.DeserializeObject<SettingsData>(settingsDataString);
 
             var now = DateTime.Now;
             DateTime start = now.AddHours(-settingsData.WindowHours);
@@ -109,7 +110,10 @@ namespace Piller.ViewModels
             if (itemsNearest != null)
                 this.NearestList = itemsNearest;
             else
-                this.NearestList = new List<NotificationOccurrence>();*/
+                this.NearestList = new List<NotificationOccurrence>();
         }
+		*/
+
+
     }
 }

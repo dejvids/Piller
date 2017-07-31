@@ -53,8 +53,6 @@ namespace Piller.iOS.Views
             base.ViewDidLoad();
             View.BackgroundColor = UIColor.White;
 			
-            /*
-            */
             RegistrationViewModel registrationViewModel = (RegistrationViewModel)Mvx.IocConstruct(typeof(RegistrationViewModel));
             MedicalCardViewModel medicalCardViewModel = (MedicalCardViewModel)Mvx.IocConstruct(typeof(MedicalCardViewModel));
             HolidayViewModel holidayViewModel = (HolidayViewModel)Mvx.IocConstruct(typeof(HolidayViewModel));
@@ -68,37 +66,18 @@ namespace Piller.iOS.Views
             medicalCardView.TabBarItem = new UITabBarItem("Karta medyczna",UIImage.FromBundle("hospital"),1);
             holidayView.TabBarItem = new UITabBarItem("Wakacje",UIImage.FromBundle("holiday"),2);
             */
+
             var viewControllerList = new UIViewController[]
             {
                 CreateTabFor("Najbliższe","recent",registrationViewModel),
                 CreateTabFor("Karta medyczna","hospital",medicalCardViewModel),
                 CreateTabFor("Wakacje","holiday",holidayViewModel)
             
-            };
-            /*
-            var viewControllerList = new UIViewController[]
-            {
-                
-                upcomingMedicationsview,
-                medicalCardView,
-                holidayView
+            };                 
 
-            };
-            */
             ViewControllers = viewControllerList;
-           // this.ViewModel.ShowMedicalCardView.Execute().Subscribe();
         }
 
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-           // 
-            //if (ViewModel != null && _isPresentedFirstTime)
-            //{
-                //_isPresentedFirstTime = false;
-               // ViewModel.ShowMedicalCardView.Execute();
-            //}
-        }
 
         public bool ShowView(IMvxIosView view)
         {

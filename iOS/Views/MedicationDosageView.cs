@@ -40,11 +40,10 @@ namespace Piller.iOS.Views
             this.saveButton = new UIBarButtonItem (UIKit.UIBarButtonSystemItem.Save);
             this.NavigationItem.RightBarButtonItem = saveButton;
 
-            /*
-            setBindings();
+           // setBindings();
 
-            */
         }
+        
 
         private FormDefinition createEditForm()
         {
@@ -58,7 +57,8 @@ namespace Piller.iOS.Views
        
             return rootElement;
         }
-        /*
+
+		/*
         private void setBindings()
         {
   
@@ -73,8 +73,8 @@ namespace Piller.iOS.Views
             
             bindingSet.Apply();
         }
-
-        */
+*/
+        
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
