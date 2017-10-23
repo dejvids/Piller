@@ -24,6 +24,7 @@ namespace Piller.iOS.Views
         ElementTableSource tableSource;
         SingleLineEditElement drugNameElement;
         SingleLineEditElement dosageElement;
+        PhotoElement photoElement;
         UIBarButtonItem saveButton;
 
         public override void ViewDidLoad()
@@ -53,8 +54,11 @@ namespace Piller.iOS.Views
             dosageElement = new SingleLineEditElement { Title = "Dawka" };
             var dosageEntrySection = new Section(String.Empty, new List<Element> { dosageElement });
 
-            var rootElement = new FormDefinition(new List<Section> { drugEntrySection,dosageEntrySection });
+            photoElement = new PhotoElement() { Title = "Zdjęcie" };
+            var photoSection = new Section(String.Empty, new List<Element> { photoElement });
+            var rootElement = new FormDefinition(new List<Section> { drugEntrySection,dosageEntrySection,photoSection });
        
+
             return rootElement;
         }
 

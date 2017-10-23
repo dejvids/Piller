@@ -131,31 +131,46 @@
       <HintPath>..\packages\MvvmCross.Plugin.File.4.4.0\lib\Xamarin.iOS10\MvvmCross.Plugins.File.iOS.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Platform">
-      <HintPath>..\packages\MvvmCross.Platform.5.1.1\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Platform.5.2.1\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform.iOS">
-      <HintPath>..\packages\MvvmCross.Platform.5.1.1\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Platform.5.2.1\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MvvmCross.Core">
-      <HintPath>..\packages\MvvmCross.Core.5.1.1\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Core.5.2.1\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MvvmCross.iOS">
-      <HintPath>..\packages\MvvmCross.Core.5.1.1\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Core.5.2.1\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MvvmCross.Binding">
-      <HintPath>..\packages\MvvmCross.Binding.5.1.1\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Binding.5.2.1\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MvvmCross.Binding.iOS">
-      <HintPath>..\packages\MvvmCross.Binding.5.1.1\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Binding.5.2.1\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.Binding.5.1.1\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Binding.5.2.1\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MvvmCross.iOS.Support">
-      <HintPath>..\packages\MvvmCross.iOS.Support.5.1.1\lib\Xamarin.iOS10\MvvmCross.iOS.Support.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.iOS.Support.5.2.1\lib\Xamarin.iOS10\MvvmCross.iOS.Support.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.Messenger">
-      <HintPath>..\packages\MvvmCross.Plugin.Messenger.5.1.1\lib\Xamarin.iOS10\MvvmCross.Plugins.Messenger.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Plugin.Messenger.5.2.1\lib\Xamarin.iOS10\MvvmCross.Plugins.Messenger.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.PictureChooser">
+      <HintPath>..\packages\MvvmCross.Plugin.PictureChooser.5.2.1\lib\Xamarin.iOS10\MvvmCross.Plugins.PictureChooser.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.PictureChooser.iOS">
+      <HintPath>..\packages\MvvmCross.Plugin.PictureChooser.5.2.1\lib\Xamarin.iOS10\MvvmCross.Plugins.PictureChooser.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +192,8 @@
     <ImageAsset Include="Assets.xcassets\recent.imageset\recent.png" />
     <ImageAsset Include="Assets.xcassets\hospital.imageset\hospital.png" />
     <ImageAsset Include="Assets.xcassets\holiday.imageset\holiday.png" />
+    <ImageAsset Include="Assets.xcassets\thumbnail.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\thumbnail.imageset\ic_add_a_photo_black_48dp.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -186,6 +203,7 @@
     <Folder Include="Assets.xcassets\recent.imageset\" />
     <Folder Include="Assets.xcassets\hospital.imageset\" />
     <Folder Include="Assets.xcassets\holiday.imageset\" />
+    <Folder Include="Assets.xcassets\thumbnail.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -220,6 +238,9 @@
     <Compile Include="Views\RootView.cs" />
     <Compile Include="Views\SettingsView.cs" />
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
+    <Compile Include="Bootstrap\PictureChooserPluginBootstrap.cs" />
+    <Compile Include="Common\Dialog\PhotoElement.cs" />
+    <Compile Include="Common\Dialog\PhotoCell.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
