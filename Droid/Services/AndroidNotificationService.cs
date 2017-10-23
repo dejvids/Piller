@@ -94,6 +94,8 @@ namespace Piller.Droid.Services
             // cancel alarm
             var alarmManager = (AlarmManager)this.ctx.GetSystemService(Context.AlarmService);
             Intent intent = new Intent(this.ctx, typeof(NotificationPublisher));
+            intent.SetAction("GO_TO_MEDICATION");
+
             if (PendingIntent.GetBroadcast(this.ctx, notificationOccurrence.Id.Value, intent, PendingIntentFlags.CancelCurrent) != null)
             {
                 System.Diagnostics.Debug.Write($"[PILLER] Cancelling alarm with id {notificationOccurrence.Id.Value}.");
@@ -174,7 +176,7 @@ namespace Piller.Droid.Services
 
             notificationIntent.PutExtra(NotificationPublisher.NOTIFICATION_ID, notificationOccurrence.Id.Value);
 			notificationIntent.PutExtra(NotificationPublisher.MEDICATION_ID, id);
-			notificationIntent.PutExtra(NotificationPublisher.NOTIFICATION, notification);
+		    notificationIntent.PutExtra(NotificationPublisher.NOTIFICATION, notification);
 			notificationIntent.PutExtra(NotificationPublisher.NOTIFICATION_FIRE_TIME, triggerTime);
 
             var requestId = notificationOccurrence.Id.Value;
@@ -182,7 +184,7 @@ namespace Piller.Droid.Services
 
 			AlarmManager alarmManager = (AlarmManager)this.ctx.GetSystemService(Context.AlarmService);
 
-			alarmManager.SetExact(AlarmType.RtcWakeup, triggerTime, pendingIntent);
+			alarmManager.SetExactAndAllowWhileIdle(AlarmType.RtcWakeup, triggerTime, pendingIntent);
 		}
     }
 }

@@ -63,7 +63,7 @@ namespace Piller.Services
 		private static DateTime NextOccurrenceFromHour(TimeSpan hour)
 		{
 			var occurrenceDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hour.Hours, hour.Minutes, 0);
-			if (DateTime.Now.Hour > hour.Hours)
+			if (DateTime.Now.TimeOfDay > hour)
 				return occurrenceDate.AddDays(1);
 			return occurrenceDate;
 		}
