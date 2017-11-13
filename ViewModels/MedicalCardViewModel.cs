@@ -23,12 +23,9 @@ namespace Piller.ViewModels
         public List<MedicationDosage> MedicationList
         {
             get { return medicationList; }
-            set { SetProperty(ref medicationList, value); RaisePropertyChanged(nameof(IsEmpty)); }
+            set { SetProperty(ref medicationList, value); }
         }
-        public bool IsEmpty
-        {
-            get { return !medicationList.Any(); }
-        }
+
 
         public ReactiveCommand<Unit, bool> AddNew { get; }
         public ReactiveCommand<Data.MedicationDosage, Unit> Edit { get; }

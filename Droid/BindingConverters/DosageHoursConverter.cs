@@ -13,7 +13,8 @@ namespace Piller.Droid.BindingConverters
 
         protected override string Convert(IEnumerable<TimeSpan> value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var ddd = value.Select(v => v.ToString(@"h\:mm"));
+            var ddd = value.Where(h=>h > DateTime.Now.TimeOfDay)
+                .Select(v => v.ToString(@"h\:mm"));
             return string.Join(", ", ddd.ToArray());
         }
 
